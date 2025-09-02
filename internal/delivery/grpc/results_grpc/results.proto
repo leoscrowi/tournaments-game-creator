@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package results;
+
+option go_package = "internal/delivery/grpc/results_grpc";
+
+import "google/protobuf/empty.proto";
+
+service ResultsService {
+  rpc FetchById (IdResultRequest) returns (ResultResponse);
+  rpc DeleteById (IdResultRequest) returns (google.protobuf.Empty);
+  rpc Update (ResultRequest) returns (google.protobuf.Empty);
+  rpc Create (ResultCreateRequest) returns (google.protobuf.Empty);
+}
+
+message IdResultRequest {
+  string id = 1;
+}
+
+message ResultResponse {
+  string id = 1;
+  string game_id = 2;
+  string winner_id = 3;
+  string comment = 4;
+}
+
+message ResultRequest {
+  string id = 1;
+  string game_id = 2;
+  string winner_id = 3;
+  string comment = 4;
+}
+
+message ResultCreateRequest {
+  string game_id = 1;
+  string winner_id = 2;
+  string comment = 3;
+}

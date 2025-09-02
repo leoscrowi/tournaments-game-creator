@@ -1,0 +1,15 @@
+networks:
+  kronbars:
+    name: ${DB_NETWORK}
+    external: true
+
+services:
+  game-creator:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file: .env
+    ports:
+      - "5100:5100"
+    networks:
+      - kronbars

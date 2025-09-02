@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package games;
+
+option go_package = "internal/delivery/grpc/games_grpc";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service GamesService {
+  rpc FetchById (IdGameRequest) returns (GameResponse);
+  rpc DeleteById (IdGameRequest) returns (google.protobuf.Empty);
+  rpc Update (GameRequest) returns (google.protobuf.Empty);
+  rpc Create (GameCreateRequest) returns (google.protobuf.Empty);
+}
+
+message IdGameRequest {
+  string id = 1;
+}
+
+message GameCreateRequest {
+  google.protobuf.Timestamp game_start = 1;
+  string                    game_type_id = 2;
+}
+
+message GameRequest {
+  string                    id = 1;
+  google.protobuf.Timestamp game_start = 2;
+  string                    game_type_id = 3;
+}
+
+message GameResponse {
+  string                    id = 1;
+  google.protobuf.Timestamp game_start = 2;
+  string                    game_type_id = 3;
+}
